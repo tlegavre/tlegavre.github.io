@@ -504,7 +504,7 @@ def build(quiet: bool = False) -> None:
             '<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + "</urlset>\n",
             encoding="utf-8")
-        (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {base}/sitemap.xml\n", encoding="utf-8")
+        (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nUser-agent: Googlebot-Image\nDisallow: /\n\nSitemap: {base}/sitemap.xml\n", encoding="utf-8")
         written += ["sitemap.xml", "robots.txt"]
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
 

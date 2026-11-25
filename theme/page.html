@@ -16,7 +16,7 @@
 {% endif %}
 <meta property="og:title" content="{{ name }}">
 <meta property="og:description" content="{{ description }}">
-{% if base_url and photo %}<meta property="og:image" content="{{ base_url }}/{{ photo }}">{% endif %}
+<meta name="robots" content="noimageindex">
 <meta property="og:type" content="profile">
 <link rel="stylesheet" href="{{ 'style.css'|url }}?v={{ version }}">
 {% if custom_css %}<link rel="stylesheet" href="{{ 'custom.css'|url }}?v={{ version }}">{% endif %}

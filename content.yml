@@ -40,8 +40,8 @@ about:
     [Thomas Ricosset](https://scholar.google.com/citations?user=UE7nIekAAAAJ) (Thales) and
     [Ange Martinelli](https://scholar.google.com/citations?user=W3Ol2B8AAAAJ) (ANSSI).
 
-    My research focuses on lattice-based cryptography, and more specifically on Fiat-Shamir with
-    Aborts signature schemes and also on lattice problems with leakage, such as
+    My research focuses on lattice-based cryptography, more specifically on Fiat-Shamir with
+    Aborts signature schemes and on lattice problems with leakage, such as
     [Hint-MLWE](https://latticeassumptionzoo.org/hint-lwe/). More precisely, I study how to integrate
     side information obtained through physical attacks into cryptanalysis, and how to design
     algorithms that safely release partial information while preserving security.
