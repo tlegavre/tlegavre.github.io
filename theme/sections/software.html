@@ -1,0 +1,13 @@
+{% if s.data.intro %}<p class="intro">{{ s.data.intro|mdi }}</p>{% endif %}
+<ul class="items">
+  {% for sw in s.entries %}
+  <li>
+    <span class="item-title">{% if sw.url %}<a href="{{ sw.url|url }}">{{ sw.name }}</a>{% else %}{{ sw.name }}{% endif %}</span>
+    {%- if sw.description %} — {{ sw.description|mdi }}{% endif %}
+    {% for tag in sw.tags or [] %}<span class="tag">{{ tag }}</span>{% endfor %}
+    {% if sw.all_links %}
+    <span class="links">{{ icon('link') }}{% for l in sw.all_links %}<a href="{{ l.url|url }}">{{ l.label }}</a>{% endfor %}</span>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>

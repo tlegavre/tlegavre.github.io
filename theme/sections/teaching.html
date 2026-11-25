@@ -1,0 +1,36 @@
+{% if s.data.intro %}<h3 class="sub-heading">{{ s.data.intro|mdi }}
+  {%- if s.data.institution %} <span class="award">{{ s.data.institution|mdi }}</span>{% endif -%}
+</h3>{% endif %}
+<ul class="rows">
+  {% for c in s.entries %}
+  <li>
+    <span class="when">{% if loop.first or c.year != s.entries[loop.index0 - 1].year %}{{ c.year }}{% endif %}</span>
+    <div>
+      <span class="item-title">{% if c.url %}<a href="{{ c.url|url }}">{{ c.course|mdi }}</a>{% else %}{{ c.course|mdi }}{% endif %}</span>
+      {%- if c.level %} ({{ c.level }}){% endif %}
+      {%- if c.hours or c.institution %}, <span class="muted">{{ [c.hours, c.institution]|select|join(', ') }}</span>{% endif %}
+      {% if c.all_links %}
+      <span class="links">{{ icon('link') }}{% for l in c.all_links %}<a href="{{ l.url|url }}">{{ l.label }}</a>{% endfor %}</span>
+      {% endif %}
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+
+{% set st = s.data.students %}
+{% if st %}
+{% if st.intro %}<h3 class="sub-heading">{{ st.intro|mdi }}</h3>{% endif %}
+<ul class="rows">
+  {% for x in st['items'] or [] %}
+  <li>
+    <span class="when">{{ x.year }}</span>
+    <div>
+      <span class="item-title">{% if x.url %}<a href="{{ x.url|url }}">{{ x.name }}</a>{% else %}{{ x.name }}{% endif %}</span>
+      {%- if x.level %} ({{ x.level }}){% endif %}
+      {%- if x.topic %}, {{ x.topic|mdi }}{% endif %}
+      {%- if x.with %}, <span class="muted">{{ L.cosupervised }} {{ x.with|names }}</span>{% endif %}
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}

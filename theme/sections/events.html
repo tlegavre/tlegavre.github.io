@@ -1,0 +1,16 @@
+{% if s.data.intro %}<p class="intro">{{ s.data.intro|mdi }}</p>{% endif %}
+<ul class="venues">
+  {% for v in s.entries %}
+  <li>
+    <span class="venue">
+      {%- if v.url %}<a href="{{ v.url|url }}">{{ v.event|mdi }}</a>{% else %}{{ v.event|mdi }}{% endif %}
+      {%- if v.place %}, {{ v.place }}{% endif -%}
+    </span>
+    {% if v.note %}<span class="badge">{{ v.note|mdi }}</span>{% endif %}
+    {% if v.date %}<span class="venue-date">{{ v.date|month }}</span>{% endif %}
+    {% if v.all_links %}
+    <span class="links">{{ icon('link') }}{% for l in v.all_links %}<a href="{{ l.url|url }}">{{ l.label }}</a>{% endfor %}</span>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>

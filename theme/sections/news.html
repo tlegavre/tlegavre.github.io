@@ -1,0 +1,16 @@
+{% set show = (s.data.show or 6)|int %}
+{% macro item(n) %}
+<p class="news-item">{% if n.date %}<span class="when">{{ n.date|date }}</span> <span class="dash">—</span> {% endif %}{{ n.text|mdi }}</p>
+{% endmacro %}
+{% if s.data.intro %}<p class="intro">{{ s.data.intro|mdi }}</p>{% endif %}
+<div class="news">
+  {% for n in s.entries[:show] %}{{ item(n) }}{% endfor %}
+</div>
+{% if s.entries|length > show %}
+<details class="older">
+  <summary>{{ L.older_news }} ({{ s.entries|length - show }})</summary>
+  <div class="news">
+    {% for n in s.entries[show:] %}{{ item(n) }}{% endfor %}
+  </div>
+</details>
+{% endif %}

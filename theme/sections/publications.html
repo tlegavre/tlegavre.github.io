@@ -1,0 +1,18 @@
+{% if s.data.intro %}<p class="intro">{{ s.data.intro|mdi }}</p>{% endif %}
+{% for g in s.groups %}
+{% if g.title %}<h3>{{ g.title }}</h3>{% endif %}
+<ol class="pubs">
+  {% for p in g.entries %}
+  <li class="pub">
+    <span class="pub-title">{% if p.url %}<a href="{{ p.url|url }}">{{ p.title|mdi }}</a>{% else %}{{ p.title|mdi }}{% endif %}</span>
+    {%- if p.with %}, <span class="with muted">{{ L.with }} {{ p.with }}</span>{% endif %}.
+    {% if p.venue %}<span class="badge venue-pill">{{ p.venue }}</span>{% if p.year_txt %} {{ p.year_txt }}.{% endif %}
+    {% elif p.year_txt %}{{ p.year_txt }}.{% endif %}
+    {% if p.note %}<span class="badge">{{ p.note|mdi }}</span>{% endif %}
+    {% if p.links %}
+    <span class="links">{{ icon('link') }}{% for l in p.links %}<a href="{{ l.url|url }}">{{ l.label }}</a>{% endfor %}</span>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ol>
+{% endfor %}

@@ -1,0 +1,10 @@
+{{ s.data.text|md }}
+{% if s.data.interests %}
+{% if s.data.interests_intro %}<p class="interests-intro">{{ s.data.interests_intro|mdi }}</p>{% endif %}
+<ul class="interests">
+  {% for item in s.data.interests %}
+  <li>{{ item|mdi }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% if s.data.more %}{{ s.data.more|md }}{% endif %}

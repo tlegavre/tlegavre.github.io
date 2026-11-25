@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}</script>
+{% set position_text = person.position|mdi|striptags %}
+<title>{{ name }}</title>
+<meta name="description" content="{{ description }}">
+<meta name="author" content="{{ name }}">
+{% if alternates %}
+<link rel="canonical" href="{{ alternates[lang] }}">
+{% for l in langs %}
+<link rel="alternate" hreflang="{{ l }}" href="{{ alternates[l] }}">
+{% endfor %}
+{% endif %}
+<meta property="og:title" content="{{ name }}">
+<meta property="og:description" content="{{ description }}">
+{% if base_url and photo %}<meta property="og:image" content="{{ base_url }}/{{ photo }}">{% endif %}
+<meta property="og:type" content="profile">
+<link rel="stylesheet" href="{{ 'style.css'|url }}?v={{ version }}">
+{% if custom_css %}<link rel="stylesheet" href="{{ 'custom.css'|url }}?v={{ version }}">{% endif %}
+<style>:root{--accent-l:{{ accent }};--accent-d:{{ accent_dark }}}</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4f5f7"/><stop offset=".45" stop-color="#c9ccd1"/><stop offset="1" stop-color="#8f939a"/>
+    </linearGradient>
+  </defs>
+</svg>
+<a class="skip" href="#main">{{ L.skip }}</a>
+{# Profile icons: under the menu (desktop), under the photo (mobile) #}
+{% macro social(where) %}
+{% if links %}
+<p class="social social-{{ where }}">
+  {% for l in links %}
+  {% set b = brand(l.icon or l.label) %}
+  <a href="{{ l.url|url }}" title="{{ l.label }}" aria-label="{{ l.label }}"{% if not b %} class="social-text"{% endif %}>{{ b or l.label }}</a>
+  {% endfor %}
+  <span class="social-sep" aria-hidden="true"></span>
+  <button class="theme-toggle" type="button" title="{{ L.theme }}" aria-label="{{ L.theme }}">
+    <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v2.2M12 20.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M1.5 12h2.2M20.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>
+  </button>
+</p>
+{% endif %}
+{% endmacro %}
+<div class="layout">
+
+  <aside class="sidebar">
+    {% if langs|length > 1 %}
+    <nav class="langs" aria-label="{{ L.language }}">
+      {% for l in langs %}
+      {% if not loop.first %}<span class="sep" aria-hidden="true">/</span>{% endif %}
+      <a href="{{ lang_links[l] }}" hreflang="{{ l }}" lang="{{ l }}"{% if l == lang %} aria-current="true"{% endif %}>{{ l|upper }}</a>
+      {% endfor %}
+    </nav>
+    {% endif %}
+    <nav class="toc" aria-label="{{ L.menu }}">
+      {% for sec in sections if sec.in_menu %}
+      {% if one_page %}
+      <a href="#{{ sec.id }}"{% if loop.first %} class="active"{% endif %}>{{ sec.title }}</a>
+      {% else %}
+      <a href="{{ files[sec.id] }}"{% if sec.id == page.id %} class="active" aria-current="page"{% endif %}>{{ sec.title }}</a>
+      {% endif %}
+      {% endfor %}
+    </nav>
+    {{ social('side') }}
+  </aside>
+
+  {% if is_home %}
+  {# Profile column: on the left on large screens, above the content otherwise #}
+  <header class="profile">
+      <div class="photo-col">
+        {% if photo %}
+        <img class="photo" src="{{ photo|url }}" alt="{{ name }}" width="184" height="184">
+        {% else %}
+        <div class="photo initials" aria-hidden="true">{{ initials }}</div>
+        {% endif %}
+        {{ social('head') }}
+      </div>
+
+      <div class="identity">
+        <div class="name-row">
+          <h1>{{ name }}</h1>
+        </div>
+        {% if person.position or affiliations %}
+        <p class="position">
+          {{- person.position|mdi -}}
+          {%- if person.position and affiliations %}, {% endif -%}
+          {% for a in affiliations %}
+          {%- if not loop.first %}<span class="sep" aria-hidden="true"> · </span>{% endif -%}
+          {% if a.url %}<a href="{{ a.url|url }}">{{ a.name }}</a>{% else %}{{ a.name }}{% endif %}
+          {%- endfor -%}
+        </p>
+        {% endif %}
+        {% if person.address or person.email or person.phone %}<p class="contact-label">{{ L.contact }}</p>{% endif %}
+        <ul class="contact">
+          {% if person.email %}
+          {# Address shown as "name [at] domain"; the mailto link is rebuilt in JS
+             so the raw address never appears in the HTML (anti-spam). #}
+          {% set parts = person.email.split('@', 1) %}
+          <li class="email-line">{{ icon('mail') }}{% if parts|length == 2 %}<a class="email" data-u="{{ parts[0] }}" data-d="{{ parts[1] }}">{{ parts[0] }}{{ person.email_at or ' at ' }}{{ parts[1] }}</a>{% else %}{{ person.email }}{% endif %}</li>
+          {% endif %}
+          {% if person.address %}
+          <li class="address">{{ icon('pin') }}<span>
+            {%- if person.address is string %}{{ person.address|mdi }}
+            {%- else %}{% for l in person.address %}<span class="addr-line">{{ l|mdi }}</span>{% endfor %}{% endif -%}
+          </span></li>
+          {% endif %}
+          {% if teams %}
+          <li>{{ icon('users') }}<span>
+            {%- for t in teams %}
+            {%- if not loop.first %}<span class="sep" aria-hidden="true"> · </span>{% endif -%}
+            {% if t.url %}<a href="{{ t.url|url }}">{{ t.name }}</a>{% else %}{{ t.name }}{% endif %}
+            {%- endfor -%}
+          </span></li>
+          {% endif %}
+          {% if person.phone %}
+          <li>{{ icon('phone') }}<a href="tel:{{ person.phone|replace(' ', '') }}">{{ person.phone }}</a></li>
+          {% endif %}
+        </ul>
+      </div>
+
+      {% if logos %}
+      <div class="logos">
+        {% for logo in logos %}
+        {% if logo.url %}<a href="{{ logo.url|url }}">{% endif %}<img src="{{ logo.file|url }}" alt="{{ logo.alt or '' }}">{% if logo.url %}</a>{% endif %}
+        {% endfor %}
+      </div>
+      {% endif %}
+  </header>
+  {% endif %}
+
+  <main id="main">
+    {% if is_home %}
+    {% for s in (sections if one_page else [page]) %}
+    <section id="{{ s.id }}" class="sec-{{ s.kind }}">
+      <h2 class="section-title">{{ s.title }}</h2>
+      {% include "sections/" ~ s.kind ~ ".html" %}
+    </section>
+    {% endfor %}
+
+    {% else %}
+    <header class="masthead">
+      <a class="mast-link" href="{{ files[sections[0].id] }}">
+        {% if photo %}
+        <img class="mast-photo" src="{{ photo|url }}" alt="" width="52" height="52">
+        {% else %}
+        <span class="mast-photo initials" aria-hidden="true">{{ initials }}</span>
+        {% endif %}
+        <span class="mast-text">
+          <span class="mast-name">{{ name }}</span>
+          {% if position_text %}<span class="mast-position">{{ position_text }}{% if affiliations %}, {{ affiliations|map(attribute='name')|join(' · ') }}{% endif %}</span>{% endif %}
+        </span>
+      </a>
+    </header>
+
+    <section class="sec-{{ page.kind }}">
+      <h1 class="section-title">{{ page.title }}</h1>
+      {% include "sections/" ~ page.kind ~ ".html" %}
+    </section>
+    {% endif %}
+
+    <footer>
+      {% if footer %}{{ footer|md }}{% endif %}
+      <p class="copyright">© {{ name }} · {{ L.updated }}{{ ' :' if lang == 'fr' else ':' }} {{ updated }}</p>
+    </footer>
+  </main>
+</div>
+<script src="{{ 'main.js'|url }}?v={{ version }}" defer></script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+site:
+  languages: [en]
+  sections: [about, publications, presentations, teaching, events, service]
+  multipage: false
+  accent: "#1f5aa6"
+  accent_dark: "#8db8f5"
+  base_url: "https://tlegavre.github.io"
+  description: Personal page of Thomas Legavre, PhD student in cryptology at LIP6 (Sorbonne Université), Thales and ANSSI.
+
+person:
+  name: Thomas Legavre
+  initials: TL
+  photo: photo.jpg
+  email: thomas.legavre@lip6.fr
+  email_at: " [at] "
+  address:
+    - "Campus Pierre et Marie Curie,"
+    - "4 place Jussieu, 75005 Paris, France"
+
+  logos:
+    - { file: logo-sorbonne.svg, url: "https://www.sorbonne-universite.fr", alt: Sorbonne Université }
+    - { file: logo-lip6.svg, url: "https://www.lip6.fr", alt: LIP6 }
+    - { file: logo-thales.svg, url: "https://www.thalesgroup.com", alt: Thales }
+    - { file: logo-anssi.svg, url: "https://cyber.gouv.fr", alt: ANSSI }
+
+links:
+  - { label: GitHub, url: "https://github.com/tlegavre" }
+  - { label: LinkedIn, url: "https://www.linkedin.com/in/thomas-legavre/" }
+  - { label: ORCID, url: "https://orcid.org/0009-0005-1432-6129" }
+  - { label: Google Scholar, url: "https://scholar.google.com/citations?user=E2cm4HwAAAAJ&hl=fr" }
+  - { label: DBLP, url: "" }
+  - { label: CV, url: "" }
+
+about:
+  text: |
+    I am a PhD student in cryptology at [ALMASTY](https://almasty.team.lip6.fr/)
+    ([LIP6](https://www.lip6.fr), [Sorbonne Université](https://www.sorbonne-universite.fr)),
+    [Thales](https://www.thalesgroup.com) and [ANSSI](https://cyber.gouv.fr) (French National Cybersecurity Agency),
+    where I am supervised by [Damien Vergnaud](https://perso.lip6.fr/Damien.Vergnaud/) and co-supervised by
+    [Thomas Ricosset](https://scholar.google.com/citations?user=UE7nIekAAAAJ) (Thales) and
+    [Ange Martinelli](https://scholar.google.com/citations?user=W3Ol2B8AAAAJ) (ANSSI).
+
+    My research focuses on lattice-based cryptography, and more specifically on Fiat-Shamir with
+    Aborts signature schemes and also on lattice problems with leakage, such as
+    [Hint-MLWE](https://latticeassumptionzoo.org/hint-lwe/). More precisely, I study how to integrate
+    side information obtained through physical attacks into cryptanalysis, and how to design
+    algorithms that safely release partial information while preserving security.
+
+publications:
+  intro: An up-to-date list is also available on [DBLP](https://dblp.org/pid/403/0920.html) and [IACR ePrint archive](https://eprint.iacr.org).
+  group_by: year
+  order: [preprint, published]
+  items:
+    - kind: preprint
+      title: "Rank&amp;Solve: Primal-Hybrid Attacks on Hint-(M)LWE"
+      with: [Thomas Ricosset, Paul Vié]
+      note: To appear
+    - kind: preprint
+      title: "Gauss Who's Back: Recovering HAETAE Keys from Hyperball Sampler Leakage"
+      with: [Grégoire Anquetin, Eleonore van der Ploeg, Thomas Ricosset]
+      note: To appear
+    - kind: published
+      title: "DAKE: Bandwidth-Efficient (U)AKE from Double-KEM"
+      with: [Hugo Beguinet, Céline Chevalier, Guirec Lebrun, Thomas Ricosset, Maxime Roméas, Éric Sageloli]
+      venue: "[PKC 2026](https://pkc.iacr.org/2026/)"
+      year: 2026
+      doi: 10.1007/978-3-032-26740-5_1
+      eprint: 2025/1755
+    - kind: published
+      title: "ML-DSA masking sweetened with SUCRE: Shuffle-and-Unmask Countermeasure for REjection sampling"
+      with: [Sonia Belaïd, Ryad Benadjila, Julien Devevey, Morgane Guerreau, Ange Martinelli, Thomas Ricosset, Matthieu Rivain, Mélissa Rossi]
+      venue: "[TCHES 2026](https://tches.iacr.org/index.php/TCHES/issue/view/398)"
+      year: 2026
+      doi: 10.46586/tches.v2026.i1.618-659
+      eprint: 2026/2248
+    - kind: published
+      title: "Breaking HuFu with 0 Leakage: A Side-Channel Analysis"
+      with: [Julien Devevey, Morgane Guerreau, Ange Martinelli, Thomas Ricosset]
+      venue: "[CASCADE 2025](https://cascade-conference.org/Archives/2025/index.html)"
+      year: 2025
+      doi: 10.1007/978-3-032-01405-4_5
+      eprint: 2025/548
+
+presentations:
+  talks:
+    - title: "ML-DSA masking sweetened with SUCRE: Shuffle-and-Unmask Countermeasure for REjection sampling"
+      pdf: files/sucre_slides_ches2026.pdf
+      venues:
+        - { event: Lattice-based crypto day, place: "Inria, Paris, France", date: 2026-11, url: "https://pepr-pq-tls.cnrs.fr" }
+        - { event: CHES 2026, place: "Antalya, Türkiye", date: 2026-10, url: "https://ches.iacr.org/2026/program.php" }
+        - { event: ALMASTY seminar, place: "LIP6, Paris, France", date: 2025-12, url: "https://almasty.team.lip6.fr/seminar/seminar_2526.html" }
+        - { event: PEPR PQ-TLS, place: "Inria, Paris, France", date: 2025-10, url: "https://pepr-pq-tls.cnrs.fr" }
+    - title: "Breaking HuFu with 0 Leakage: A Side-Channel Analysis"
+      pdf: files/hufu_slides_wrach2025.pdf
+      venues:
+        - { event: WRACH 2025, place: "Roscoff, Brittany", date: 2025-04, url: "https://wrach2025.conf.lip6.fr/" }
+        - { event: Journées C2 2025, place: "Pornichet, France", date: 2025-04, url: "https://indico.math.cnrs.fr/event/11948/" }
+  posters:
+    - title: ML-DSA Masking Sweetened with SUCRE
+      pdf: files/sucre_poster_a0.pdf
+      award: Best Poster award
+      venues:
+        - event: European Cyber Week 2026
+          place: "Rennes, Brittany"
+          date: 2026-11
+          url: "https://lercier.pages.math.cnrs.fr/pqc-workshop-2026/index.html"
+
+events:
+  items:
+    - { event: Asiacrypt 2026, place: "Hong Kong, China", date: 2026-12, url: "https://asiacrypt.iacr.org/2026/" }
+    - { event: European Cyber Week 2026, place: "Rennes, Brittany", date: 2026-11, url: "https://lercier.pages.math.cnrs.fr/pqc-workshop-2026/index.html" }
+    - { event: CHES 2026, place: "Antalya, Türkiye", date: 2026-10, url: "https://ches.iacr.org/2026/" }
+    - { event: IACR-VIASM Summer School on Cryptography 2026, place: "Hanoi, Vietnam", date: 2026-08, url: "https://viasm.edu.vn/hdkh/IACR-VIASM-School-2026" }
+    - { event: Journées C2 2026, place: "Blériot-Plage, France", date: 2026-04, url: "https://jc2-2026.sciencesconf.org/" }
+    - { event: Cyber In Occitanie, place: "Font-Romeu, France", date: 2025-07, url: "https://cyberoccitanie.sciencesconf.org/" }
+    - { event: WRACH 2025, place: "Roscoff, Brittany", date: 2025-04, url: "https://wrach2025.conf.lip6.fr/" }
+    - { event: Journées C2 2025, place: "Pornichet, France", date: 2025-04, url: "https://indico.math.cnrs.fr/event/11948/" }
+    - { event: Design and Cryptanalysis of Post-Quantum Schemes, place: "IHP, Paris, France", date: 2024-11, url: "https://sites.google.com/view/pqa-ihp-2024/workshop-2" }
+    - { event: Mathematics for Post-Quantum Cryptanalysis 2024, place: "Budapest, Hungary", date: 2024-08, url: "https://www.esat.kuleuven.be/cosic/events/math-pqc/" }
+    - { event: PQ-TLS Summer School 2024, place: "Anglet, France", date: 2024-06, url: "https://pqtlsecole2024.sciencesconf.org/" }
+
+teaching:
+  intro: Courses given
+  items:
+    - year: 2026–2027
+      course: "UM5IN951 - CRYPTO 2 - Cryptologie avancée et appliquée"
+      url: "https://moodle-sciences-26.sorbonne-universite.fr/course/index.php?categoryid=61&browse=courses&perpage=20&page=6"
+      hours: 2nd year Master
+      institution: Sorbonne University
+  students:
+    intro: Students
+    items:
+      - year: "2 months – 2026"
+        name: Paul Vié
+        url: "https://plvie.github.io"
+        level: M1 Internship, Télécom Paris
+        with: Thomas Ricosset
+      - year: "6 months – 2025"
+        name: Eléonore Van der Ploeg
+        url: "https://fr.linkedin.com/in/el%C3%A9onore-van-der-ploeg-0363412a2"
+        level: M2 Internship, University of Limoges
+        with: [Vincent Grosso, Angélique Lopez, Thomas Ricosset]
+
+custom:
+  service:
+    title: Academic Service
+    body: |
+      - External reviewer for Eurocrypt 2027, IWSEC 2026
+

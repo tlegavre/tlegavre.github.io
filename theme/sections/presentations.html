@@ -1,0 +1,30 @@
+{% if s.data.intro %}<p class="intro">{{ s.data.intro|mdi }}</p>{% endif %}
+{% for g in s.groups %}
+<h3 class="sub-heading"><span>{{ g.title }}</span></h3>
+{% for t in g.entries %}
+<div class="pres">
+  <h4 class="pres-title">
+    {%- if t.url %}<a href="{{ t.url|url }}">{{ t.title|mdi }}</a>{% else %}{{ t.title|mdi }}{% endif %}
+    {%- if t.pdf %} <a class="pdf-link" href="{{ t.pdf|url }}" title="PDF"><svg class="icon-pdf" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 1.5h8.5l6 6V20.5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-17a2 2 0 0 1 2-2z"/><path class="fold" d="M14.5 1.5v4.5a1.5 1.5 0 0 0 1.5 1.5h4.5"/></svg>PDF</a>{% endif %}
+    {%- if t.award %} <span class="award">{{ icon('trophy') }}{{ t.award|mdi }}</span>{% endif -%}
+  </h4>
+  {% if t.venues %}
+  <ul class="venues">
+    {% for v in t.venues %}
+    <li>
+      <span class="venue">
+        {%- if v.url %}<a href="{{ v.url|url }}">{{ v.event|mdi }}</a>{% else %}{{ v.event|mdi }}{% endif %}
+        {%- if v.place %}, {{ v.place }}{% endif -%}
+      </span>
+      {% if v.note %}<span class="badge">{{ v.note|mdi }}</span>{% endif %}
+      {% if v.date %}<span class="venue-date">{{ v.date|month }}</span>{% endif %}
+      {% if v.all_links %}
+      <span class="links">{{ icon('link') }}{% for l in v.all_links %}<a href="{{ l.url|url }}">{{ l.label }}</a>{% endfor %}</span>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+{% endfor %}
+{% endfor %}
